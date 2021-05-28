@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "youtube_clone",
   "scripts": {
-    "dev": "nodemon --exec babel-node index.js"
+    "dev": "nodemon --exec babel-node src/server.js"
   },
   "author": "Minha Lee<shjune1994@gmail.com>",
   "license": "MIT",
@@ -12,7 +12,8 @@
   },
   "homepage": "https://github.com/MinhaLee94/youtube_clone_revised#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
