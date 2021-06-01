@@ -5,6 +5,8 @@
 /login -> Login
 /search -> Search
 
+/users/:id
+/users/logout
 /users/edit
 /users/delete
 
