@@ -13,7 +13,9 @@
   "homepage": "https://github.com/MinhaLee94/youtube_clone_revised#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.12.12",
     "morgan": "^1.10.0",
+    "prettier": "^2.3.0",
     "pug": "^3.0.2"
   },
   "devDependencies": {
