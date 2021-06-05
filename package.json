@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "youtube_clone",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"
+    "dev": "nodemon --exec babel-node src/init.js"
   },
   "author": "Minha Lee<shjune1994@gmail.com>",
   "license": "MIT",
