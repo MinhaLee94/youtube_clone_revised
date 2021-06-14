@@ -133,10 +133,70 @@ export const getEdit = (req, res) => {
   return res.render("edit-profile", { pageTitle: "Edit Profile" });
 }
 
-export const postEdit = (req, res) => {
-  return res.render("edit-profile");
-}
+export const postEdit = async (req, res) => {
+  const {
+    session: {
+      user: { _id: id, email: sessionEmail, username: sessionUsername, avatarUrl },
+    },
+    body: { name, email, username, location },
+    file
+  } = req;
+  const change = sessionUsername !== username || sessionEmail !== email;
+  if (change) {
+    const existingUser = await User.exists({ $or: [{sessionUsername}, {sessionEmail}] });
+    if (existingUser && existingUser._id !== id) {
+      return res.status(400).render("edit-profile", { 
+        pageTitle: "Edit Profile", 
+        errorMessage: "The username or email already exists" 
+      });
+    }
+  }
+  const updatedUser = await User.findByIdAndUpdate(
+    id, 
+    {
+      avatarUrl: file ? file.path : avatarUrl, 
+      name,
+      email,
+      username,
+      location,
+    },
+    { new: true }
+  );
+  req.session.user = updatedUser;
+  return res.redirect("/users/edit");
+};
 
+export const getChangePassword = (req, res) => {
+  if (req.session.user.socialLogin === true) {
+    return res.redirect("/");
+  }
+  return res.render("users/change-password", { pageTitle: "Change Password" });
+};
 
+export const postChangePassword = async (req, res) => {
+  const {
+    session: {
+      user: { _id: id, password },
+    },
+    body: { oldPassword, newPassword, newPassword2 }
+  } = req;
+  const user = await User.findById(id);
+  const confirmation = await bcrypt.compare(oldPassword, user.password);
+  if (!confirmation) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "The current password is incorrect",
+    });
+  }
+  if (newPassword !== newPassword2) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "Password confirmation doesn't match",
+    });
+  }
+  user.password = newPassword;
+  await user.save();
+  return res.redirect("/users/logout");
+};
 
 export const see = (req, res) => res.send("See");
