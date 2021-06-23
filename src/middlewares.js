@@ -11,6 +11,7 @@ export const userOnlyMiddleware = (req, res, next) => {
   if(req.session.loggedIn) {
     next();
   } else {
+    req.flash("error", "Login first");
     return res.redirect("/login");
   }
 };
@@ -19,6 +20,7 @@ export const guestOnlyMiddleware = (req, res, next) => {
   if(!req.session.loggedIn) {
     return next();
   } else {
+    req.flash("error", "Not authorized");
     return res.redirect("/");
   }
 }
