@@ -126,8 +126,8 @@ export const githubLoginCallback = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  req.session.destroy();
   req.flash("info", "Successfully logged out");
+  req.session.destroy();
   return res.redirect("/");
 }
 
