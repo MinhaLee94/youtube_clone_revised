@@ -5,7 +5,7 @@ block content
         video(src="/" + video.fileUrl)
         div#videoControls.videoControls
             div.videoControls__play
-                span#play.videoControls__playBtn
+                div#play.videoControls__playBtn
                     i.fas.fa-play
                 div.videoControls__time
                     span#currenTime 00:00
@@ -43,7 +43,6 @@ block content
                     span #{comment.text}
                     if String(comment.owner) === String(loggedInUser._id)
                         i.fas.fa-trash-alt.video__comment-delete
-                    // 컨트롤러 내에서 작성자가 맞는지 확인 (작성자가 아닐 경우 삭제 불가)
 block scripts
     script(src="/static/js/videoPlayer.js")
     if loggedIn

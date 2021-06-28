@@ -11,6 +11,8 @@ const fullScreenBtn = document.getElementById("fullScreen");
 const fullScreenIcon = fullScreenBtn.querySelector("i");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
+const commentForm = document.getElementById("commentForm");
+const addCommentBtn = commentForm.querySelector("button");
 
 let controlsLeaveTimeout = null;
 let controlsMovementTimeout = null;
@@ -111,12 +113,29 @@ const handleKeypressPlay = (event) => {
   }
 };
 
+const handleKeypressComment = (event) => {
+  const { keyCode } = event;
+  if (keyCode === 13) {
+    addCommentBtn.click();
+  }
+};
+
 const handleEnded = () => {
   console.log(videoContainer.dataset);
   const { videoid: id } = videoContainer.dataset;
   fetch(`/api/videos/${id}/view`, {
     method: "POST",
   });
+};
+
+const handleFocusIn = () => {
+  document.removeEventListener("keypress", handleKeypressPlay);
+  document.addEventListener("keypress", handleKeypressComment)
+};
+
+const handleFocusOut = () => {
+  document.addEventListener("keypress", handleKeypressPlay);
+  document.removeEventListener("keypress", handleKeypressComment);
 };
 
 playBtn.addEventListener("click", handlePlayClick);
@@ -131,3 +150,5 @@ videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullscreen);
 document.addEventListener("keypress", handleKeypressPlay);
+commentForm.addEventListener("focusin", handleFocusIn);
+commentForm.addEventListener("focusout", handleFocusOut);
