@@ -15,8 +15,8 @@ header
           a(href="/users/logout") Log out
         li 
           a(href=`/users/${loggedInUser._id}`)
-            if loggedInUser.avatarUrl === ""
-              span basic image
+            if !loggedInUser.avatarUrl
+              i.fas.fa-user.basic__avatar
             else
               if loggedInUser.avatarUrl.includes("github")
                 img(src=loggedInUser.avatarUrl).header__avatar

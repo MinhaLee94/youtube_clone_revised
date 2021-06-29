@@ -24,23 +24,26 @@ block content
         p.video__title=video.title
         small.video__owner Uploaded by 
             a(href=`/users/${video.owner._id}`)=video.owner.name
-        small.video__createdAt=new Date(video.createdAt).toLocaleDateString("en-US", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
-
-        if String(video.owner._id) === String(loggedInUser._id)
-            a(href=`${video.id}/edit`) Edit Video &rarr;
-            br
-            a(href=`${video.id}/delete`) Delete Video &rarr;
+        div.video__meta
+            small.video__views=`${video.meta.views} views · `
+            small.video__createdAt=new Date(video.createdAt).toLocaleDateString("en-US", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+        div.owner__option
+            if String(video.owner._id) === String(loggedInUser._id)
+                a(href=`${video.id}/edit`) Edit Video &rarr;
+                a(href=`${video.id}/delete`) Delete Video &rarr;
+    hr.divider
     if loggedIn
         div.video__add-comments
             form.video__comment-form#commentForm
-                textarea(cols="30", rows="10", placeholder="Write a nice commment...")
+                textarea(cols="30", rows="10", placeholder="add comments...")
                 button Add Comment
     div#video__comments
         ul
             each comment in video.comments.reverse()
                 li.video__comment(data-id=comment.id, data-owner=comment.owner)
-                    i.fas.fa-comment
-                    span #{comment.text}
+                    div.video__comment-left
+                        i.fas.fa-comment
+                        span #{comment.text}
                     if String(comment.owner) === String(loggedInUser._id)
                         i.fas.fa-trash-alt.video__comment-delete
 block scripts

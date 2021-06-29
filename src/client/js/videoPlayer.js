@@ -120,14 +120,6 @@ const handleKeypressComment = (event) => {
   }
 };
 
-const handleEnded = () => {
-  console.log(videoContainer.dataset);
-  const { videoid: id } = videoContainer.dataset;
-  fetch(`/api/videos/${id}/view`, {
-    method: "POST",
-  });
-};
-
 const handleFocusIn = () => {
   document.removeEventListener("keypress", handleKeypressPlay);
   document.addEventListener("keypress", handleKeypressComment)
@@ -136,6 +128,13 @@ const handleFocusIn = () => {
 const handleFocusOut = () => {
   document.addEventListener("keypress", handleKeypressPlay);
   document.removeEventListener("keypress", handleKeypressComment);
+};
+
+const handleEnded = () => {
+  const { id } = videoContainer.dataset;
+  fetch(`/api/videos/${id}/view`, {
+    method: "POST",
+  });
 };
 
 playBtn.addEventListener("click", handlePlayClick);

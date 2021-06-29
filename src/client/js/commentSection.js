@@ -28,12 +28,17 @@ const addComment = async (text, id) => {
   commentIcon.className = "fas fa-comment";
 
   const span = document.createElement("span");
-  span.innerText = ` ${text}`;
+  span.innerText = `${text}`;
 
   const deleteIcon = document.createElement("i");
   deleteIcon.className = "fas fa-trash-alt video__comment-delete";
-  newComment.appendChild(commentIcon);
-  newComment.appendChild(span);
+
+  const commentLeft = document.createElement("div");
+  commentLeft.className = "video__comment-left";
+  commentLeft.appendChild(commentIcon);
+  commentLeft.appendChild(span);
+
+  newComment.appendChild(commentLeft);
   newComment.appendChild(deleteIcon);
   videoComments.prepend(newComment);
 };
