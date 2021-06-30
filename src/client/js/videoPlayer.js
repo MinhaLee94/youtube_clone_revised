@@ -12,7 +12,9 @@ const fullScreenIcon = fullScreenBtn.querySelector("i");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 const commentForm = document.getElementById("commentForm");
-const addCommentBtn = commentForm.querySelector("button");
+if (commentForm) {
+  const addCommentBtn = commentForm.querySelector("button");
+}
 
 let controlsLeaveTimeout = null;
 let controlsMovementTimeout = null;
@@ -109,6 +111,7 @@ const handleMouseLeave = () => {
 const handleKeypressPlay = (event) => {
   const { keyCode } = event;
   if (keyCode === 32) {
+    event.preventDefault();
     handlePlayClick();
   }
 };
@@ -149,5 +152,7 @@ videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullscreen);
 document.addEventListener("keypress", handleKeypressPlay);
-commentForm.addEventListener("focusin", handleFocusIn);
-commentForm.addEventListener("focusout", handleFocusOut);
+if (commentForm) {
+  commentForm.addEventListener("focusin", handleFocusIn);
+  commentForm.addEventListener("focusout", handleFocusOut);
+}

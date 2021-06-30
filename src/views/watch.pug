@@ -1,51 +1,65 @@
 extends base
 
 block content
-    div#videoContainer(data-id=video._id)
-        video(src="/" + video.fileUrl)
-        div#videoControls.videoControls
-            div.videoControls__play
-                div#play.videoControls__playBtn
-                    i.fas.fa-play
-                div.videoControls__time
-                    span#currenTime 00:00
-                    span  / 
-                    span#totalTime 00:00
-            input(type="range",step="1", value="0", min="0")#timeline.videoControls__timeline
-            div.videoControls__volume
-                input(type="range",step="0.1", value=0.5, min="0", max="1")#volume
-                span#mute
-                    i.fas.fa-volume-up
-            div
-                span#fullScreen
-                    i.fas.fa-expand
-
-    div.video__data
-        p.video__title=video.title
-        small.video__owner Uploaded by 
-            a(href=`/users/${video.owner._id}`)=video.owner.name
-        div.video__meta
-            small.video__views=`${video.meta.views} views · `
-            small.video__createdAt=new Date(video.createdAt).toLocaleDateString("en-US", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+    main
+        div#videoContainer(data-id=video._id)
+            video(src="/" + video.fileUrl)
+            div#videoControls.videoControls
+                div.videoControls__play
+                    div#play.videoControls__playBtn
+                        i.fas.fa-play
+                    div.videoControls__time
+                        span#currenTime 00:00
+                        span  / 
+                        span#totalTime 00:00
+                input(type="range",step="1", value="0", min="0")#timeline.videoControls__timeline
+                div.videoControls__volume
+                    input(type="range",step="0.1", value=0.5, min="0", max="1")#volume
+                    span#mute
+                        i.fas.fa-volume-up
+                div
+                    span#fullScreen
+                        i.fas.fa-expand
+        div.video__data
+            p.video__title=video.title
+            div.video__meta
+                small.video__views=`${video.meta.views} views · `
+                small.video__createdAt=new Date(video.createdAt).toLocaleDateString("en-US", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+        div.divider
+        div.video__owner
+            if !video.owner.avatarUrl
+                a(href=`/users/${video.owner._id}`)
+                    i.fas.fa-user.basic__avatar
+            else
+                if video.owner.avatarUrl.includes("github")
+                    a(href=`/users/${video.owner._id}`)
+                        img(src=video.owner.avatarUrl).video__owner-avatar
+                else
+                    a(href=`/users/${video.owner._id}`)
+                        img(src="/" + video.owner.avatarUrl).video__owner-avatar
+            a(href=`/users/${video.owner._id}`)=video.owner.username
+        div.video__data2
+            span.video__description=video.description
+            span.video__hashtags=video.hashtags
         div.owner__option
             if String(video.owner._id) === String(loggedInUser._id)
                 a(href=`${video.id}/edit`) Edit Video &rarr;
                 a(href=`${video.id}/delete`) Delete Video &rarr;
-    hr.divider
-    if loggedIn
-        div.video__add-comments
-            form.video__comment-form#commentForm
-                textarea(cols="30", rows="10", placeholder="add comments...")
-                button Add Comment
-    div#video__comments
-        ul
-            each comment in video.comments.reverse()
-                li.video__comment(data-id=comment.id, data-owner=comment.owner)
-                    div.video__comment-left
-                        i.fas.fa-comment
-                        span #{comment.text}
-                    if String(comment.owner) === String(loggedInUser._id)
-                        i.fas.fa-trash-alt.video__comment-delete
+        div.divider
+        if loggedIn
+            div.video__add-comments
+                form.video__comment-form#commentForm
+                    textarea(cols="30", rows="10", placeholder="add comments...")
+                    button Add Comment
+        div#video__comments
+            ul
+                each comment in video.comments.reverse()
+                    li.video__comment(data-id=comment.id, data-owner=comment.owner)
+                        div.video__comment-left
+                            i.fas.fa-comment
+                            span #{comment.text}
+                        if String(comment.owner) === String(loggedInUser._id)
+                            i.fas.fa-trash-alt.video__comment-delete
 block scripts
     script(src="/static/js/videoPlayer.js")
     if loggedIn
