@@ -33,9 +33,11 @@
       justify-content: space-around;
       .videoControls__playBtn {
         padding: 0px 15px;
+        cursor: pointer;
       }
       .videoControls__time {
         font-size: 12px;
+        cursor: default;
       }
     }
     .videoControls__volume {
@@ -47,6 +49,10 @@
           font-size: 20px;
         }
       }
+    }
+    #mute,
+    #fullScreen {
+      cursor: pointer;
     }
   }
 }

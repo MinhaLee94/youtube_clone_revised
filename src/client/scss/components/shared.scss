@@ -35,3 +35,39 @@
   border: 2px solid white;
   border-radius: 50%;
 }
+
+#menu {
+  flex: 1.7;
+  background-color: #202020;
+  min-width: 200px;
+  overflow-y: hidden;
+  li {
+    padding: 14px 20px;
+    cursor: pointer;
+    i {
+      display: inline-block;
+      width: 20px;
+      color: #949494;
+      margin-right: 20px;
+      font-size: 20px;
+      text-align: center;
+    }
+    span {
+      font-size: 16px;
+    }
+    &:hover {
+      background-color: #646464;
+      i {
+        color: white;
+      }
+    }
+  }
+  .divider {
+    margin: 10px 0;
+  }
+  .menu__title {
+    color: #848494;
+    font-weight: 600;
+    padding: 10px 20px;
+  }
+}

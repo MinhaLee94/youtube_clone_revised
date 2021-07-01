@@ -15,10 +15,11 @@ export const home = async(req, res) => {
 export const watch = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id).populate("owner").populate("comments");
+  const moreVideos = await Video.find({ _id: { $ne: id }}).sort({createdAt: "desc"}).populate("owner");
   if(!video){
     return res.status(404).render("404", { pageTitle: "Video not found." });
   }
-  return res.render("watch", { pageTitle: video.title, video });
+  return res.render("watch", { pageTitle: video.title, video, moreVideos });
 };
 
 export const getEdit = async (req, res) => {
@@ -134,7 +135,7 @@ export const search = async (req, res) => {
       },
     }).populate("owner");
   }
-  return res.render("search", { pageTitle: "Search", videos });
+  return res.render("search", { pageTitle: "Search", videos, keyword });
 };
 
 export const registerView = async (req, res) => {

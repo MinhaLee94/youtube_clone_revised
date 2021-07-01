@@ -1,17 +1,13 @@
 extends base
-include mixins/video
+include mixins/searchVideo
 
 block content
   div.body__container
     include partials/menu 
     div.video__search-list
+      span.video__search-keyword=`Video Results for "${keyword}"`
+      div.divider
       each video in videos
-        +video(video)
-        +video(video)
-        +video(video)
-        +video(video)
-        +video(video)
-        +video(video)
         +video(video)
       else
         span.empty__message No videos found
