@@ -10,10 +10,7 @@ mixin video(video)
                 if !video.owner.avatarUrl
                     i.fas.fa-user.basic__avatar
                 else
-                    if video.owner.avatarUrl.includes("github")
-                        img(src=video.owner.avatarUrl).video__owner-avatar
-                    else
-                        img(src="/" + video.owner.avatarUrl).video__owner-avatar
+                    img(src=video.owner.avatarUrl).video__owner-avatar
             a(href=`/users/${video.owner._id}`).search__video-mixin__username
               span #{video.owner.username}
           div.search__video-mixin__description=video.description     

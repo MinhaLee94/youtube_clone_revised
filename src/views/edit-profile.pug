@@ -8,10 +8,7 @@ block content
       if !loggedInUser.avatarUrl
         i.fas.fa-user.temp__avatar
       else 
-        if loggedInUser.avatarUrl.includes("github")
-          img(src=loggedInUser.avatarUrl).avatar
-        else
-          img(src="/" + loggedInUser.avatarUrl).avatar
+        img(src=loggedInUser.avatarUrl).avatar
     form(method="POST", enctype="multipart/form-data").edit-profile__form
       label(for="avatar") Avatar
       input(type="file", id="avatar", name="avatar", accept = "image/*")

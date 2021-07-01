@@ -5,7 +5,7 @@ block content
     div.watch__container
         div.video__section
             div#videoContainer(data-id=video._id)
-                video(src="/" + video.fileUrl)
+                video(src=video.fileUrl)
                 div#videoControls.videoControls
                     div.videoControls__play
                         div#play.videoControls__playBtn
@@ -33,12 +33,8 @@ block content
                     a(href=`/users/${video.owner._id}`)
                         i.fas.fa-user.basic__avatar
                 else
-                    if video.owner.avatarUrl.includes("github")
-                        a(href=`/users/${video.owner._id}`)
-                            img(src=video.owner.avatarUrl).video__owner-avatar
-                    else
-                        a(href=`/users/${video.owner._id}`)
-                            img(src="/" + video.owner.avatarUrl).video__owner-avatar
+                    a(href=`/users/${video.owner._id}`)
+                        img(src=video.owner.avatarUrl).video__owner-avatar
                 a(href=`/users/${video.owner._id}`)=video.owner.username
             div.video__data2
                 span.video__description=video.description
