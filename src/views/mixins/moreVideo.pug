@@ -1,7 +1,7 @@
 mixin video(video)
     div.more__video-mixin
         a(href=`/videos/${video.id}`)
-            div.more__video-mixin__thumb(style=`background-image: url(/${video.thumbUrl}); background-size: cover; background-position: center;`)
+            div.more__video-mixin__thumb(style=`background-image: url(${video.thumbUrl}); background-size: cover; background-position: center;`)
         div.more__video-mixin__data
             div.more__video-mixin__title=video.title
             a(href=`/users/${video.owner._id}`).more__video-mixin__username
