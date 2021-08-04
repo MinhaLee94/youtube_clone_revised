@@ -14,32 +14,35 @@ You can create, remove, update and delete users and videos.
 
 # How to use
 
-## Login
+## Login :credit_card:
 
-<img src="./screenshots/logIn.png" width="350px"/>
+<img src="./screenshots/logIn.png" width="450px"/>
 
 You can login with own ID as well as GitHub ID.
+
 If you don't have any ID, then you can access to create ID page by one click.
 
 ---
 
-## Recording
+## Recording :camera:
 
-<img src="./screenshots/recording_sample2.png" width="350px"/>
+<img src="./screenshots/recording_sample2.png" width="450px"/>
 
 You can directly record and download a video using an webcam attached to your computer.
 
 ---
 
-## Profile
+## Profile :file_folder:
 
-<img src="./screenshots/profile.png" width="350px"/>
+<img src="./screenshots/profile.png" width="450px"/>
 
-You can upload your avatar and if you change your avatar, all pages and videos using the avatar will be updated simultaneously.
+You can upload your avatar and if you change your avatar,
+
+all pages and videos using the avatar will be updated simultaneously.
 
 ---
 
-## Video Player
+## Video Player :tv:
 
 <img src="./screenshots/videoPlayer.png" width="600px"/>
 
@@ -51,22 +54,22 @@ It automatically counts and save views everytime when any user watches the video
 
 ## Technologies Used
 
-javascript(ES6+)
+**javascript(ES6+)**
 
-node.js: JavaScript runtime environment
+**node.js:** JavaScript runtime environment
 
-express: Backend web framework for node.js
+**express:** Backend web framework for node.js
 
-AWS(s3): To store the actual data
+**AWS(s3):** To store the actual data
 
-mongoDB: To store the address of data
+**mongoDB:** To store the address of data
 
-webpack: To enable compatibility of new features of js or scss
+**webpack:** To enable compatibility of new features of js or scss
 
-scss: More manageable and advanced css
+**scss:** More manageable and advanced css
 
-pug: Templete engine for the browser
+**pug:** Templete engine for the browser
 
-FFmpeg: To convert videos to unified video format by using users' computer
+**FFmpeg:** To convert videos to unified video format by using users' computer
 
-For development: babel, nodemon, multer
+For development: **babel, nodemon, multer**
